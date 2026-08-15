@@ -19,7 +19,6 @@
             perspective: 1000px;
         }
 
-        /* حاوية القلوب المتساقطة لتكون فوق كل شيء لتستجيب للضغط */
         .falling-item {
             position: fixed;
             top: -20vh;
@@ -48,7 +47,6 @@
             100% { transform: translateY(125vh) rotate(360deg); }
         }
 
-        /* القلوب الكبيرة خلف النص في الصفحة الثانية */
         .text-bg-heart {
             position: absolute;
             user-select: none;
@@ -74,7 +72,6 @@
             }
         }
 
-        /* تأثير ظهور كلمة بحبك عند الضغط على القلب */
         .pop-effect {
             position: fixed;
             font-size: 28px;
@@ -91,7 +88,6 @@
             100% { transform: translate(-50%, -120px) scale(1.6); opacity: 0; }
         }
 
-        /* حاوية كلمة السر */
         #pass-wrapper {
             position: relative;
             display: flex;
@@ -317,7 +313,6 @@
             100% { transform: scale(1) rotateX(0deg) rotateY(0deg); }
         }
 
-        /* صفحة عرض الفيديو */
         #final-destination-page {
             display: none;
             position: fixed;
@@ -513,13 +508,28 @@
             0% { transform: translate(0, 0) scale(1) rotate(0deg); opacity: 1; }
             100% { transform: translate(var(--dx), var(--dy)) scale(0) rotate(720deg); opacity: 0; }
         }
+
+        /* عنصر التحكم بالصوت لضمان التشغيل دون قيود */
+        #final-audio-player {
+            position: fixed;
+            bottom: -100px;
+            left: 0;
+            opacity: 0;
+            pointer-events: none;
+            z-index: -1;
+        }
     </style>
 </head>
 <body>
 
     <audio id="bg-music" src="https://files.catbox.moe/89hazq.mp3" preload="auto"></audio>
+    
+    <!-- الصوت الأخير المباشر لتفادي المحاذاة الشديدة للمتصفح -->
+    <audio id="final-audio-player" loop preload="auto">
+        <source src="https://stream.zeno.fm/f3wvbbqmdg8uv" type="audio/mpeg">
+        <source src="https://ia801503.us.archive.org/15/items/romantic-instrumental-music/Romantic.mp3" type="audio/mp3">
+    </audio>
 
-    <!-- الصفحة الأولى (كلمة السر) -->
     <div id="pass-wrapper">
         <div id="pass-container">
             <input type="password" id="pass-input" placeholder="أدخل كلمة السر">
@@ -528,7 +538,6 @@
         </div>
     </div>
 
-    <!-- الصفحة الثانية (كتابة النصوص) -->
     <div id="new-page">
         <div class="top-controls">
             <button class="action-btn" onclick="goToMainPage()">⬅️ الصفحة السابقة</button>
@@ -546,7 +555,6 @@
         </div>
     </div>
 
-    <!-- صفحة عرض الفيديو -->
     <div id="final-destination-page">
         <div class="video-container" id="vid-wrapper">
             <video id="main-video" controls playsinline preload="auto">
@@ -570,7 +578,6 @@
         </div>
     </div>
 
-    <!-- الصفحة الأخيرة -->
     <div id="fireworks-page">
         <button class="action-btn fireworks-back-btn" onclick="goBackFromFireworks()">⬅️ الصفحة السابقة</button>
         <canvas id="fireworks-canvas"></canvas>
@@ -597,11 +604,6 @@
         let mainFallingInterval = null;
         let musicStarted = false;
         let fireworksActive = false; 
-
-        // الصوت الخاص بصفحة انفجار القلب والألعاب النارية المباشر
-        const finalAudio = new Audio("https://files.catbox.moe/s600c5.mp3");
-        finalAudio.preload = "auto";
-        finalAudio.loop = true;
 
         const messages = [
             { text: "1", speed: 30, delay: 300 },
@@ -704,14 +706,7 @@
                 if (textHeartsInterval) clearInterval(textHeartsInterval);
                 textHeartsInterval = setInterval(createTextBgHeart, 750);
 
-                // تهيئة وتشغيل الصوت مبكراً لضمان عمله في المتصفحات
-                finalAudio.play().then(() => {
-                    finalAudio.pause();
-                    finalAudio.currentTime = 0;
-                }).catch(e => console.log("Unlock audio:", e));
-
                 playMusic();
-
                 setTimeout(startTypewriterSequence, 300);
             } else {
                 errorMsg.style.display = "block";
@@ -902,7 +897,6 @@
             document.getElementById("beating-heart").style.display = "block";
             document.getElementById("love-text").style.display = "none";
             
-            // التأكد من إيقاف أي ألعاب نارية سابقة حتى يضغط على القلب
             fireworksActive = false;
             const canvas = document.getElementById("fireworks-canvas");
             const ctx = canvas.getContext("2d");
@@ -911,7 +905,8 @@
 
         function goBackFromFireworks() {
             fireworksActive = false;
-            finalAudio.pause();
+            const finalAudio = document.getElementById("final-audio-player");
+            if(finalAudio) finalAudio.pause();
 
             document.getElementById("fireworks-page").style.display = "none";
             document.getElementById("final-destination-page").style.display = "flex";
@@ -946,13 +941,17 @@
             heart.style.display = "none";
             document.getElementById("love-text").style.display = "block";
 
-            // تشغيل الصوت المباشر والألعاب النارية فقط لحظة الضغط على القلب
-            finalAudio.currentTime = 0;
-            finalAudio.play().catch(e => console.log("Final audio error:", e));
+            // تشغيل الأغنية مباشرة وبثبات
+            const finalAudio = document.getElementById("final-audio-player");
+            if (finalAudio) {
+                finalAudio.currentTime = 0;
+                finalAudio.play().catch(e => console.log("Final audio play error:", e));
+            }
 
             startFireworks();
         }
 
+        /* نظام ألعاب نارية متطور احترافي */
         function startFireworks() {
             const canvas = document.getElementById("fireworks-canvas");
             const ctx = canvas.getContext("2d");
@@ -962,63 +961,77 @@
             fireworksActive = true;
             let particles = [];
 
-            function Particle(x, y, color) {
+            function FireworkParticle(x, y, color) {
                 this.x = x;
                 this.y = y;
                 this.color = color;
-                this.radius = Math.random() * 3 + 1;
+                this.radius = Math.random() * 2.5 + 1.5;
+                const angle = Math.random() * Math.PI * 2;
+                const speed = Math.random() * 8 + 1;
                 this.velocity = {
-                    x: (Math.random() - 0.5) * 8,
-                    y: (Math.random() - 0.5) * 8
+                    x: Math.cos(angle) * speed,
+                    y: Math.sin(angle) * speed
                 };
+                this.friction = 0.96;
+                this.gravity = 0.15;
                 this.alpha = 1;
+                this.decay = Math.random() * 0.015 + 0.01;
             }
 
-            Particle.prototype.draw = function() {
+            FireworkParticle.prototype.draw = function() {
                 ctx.save();
                 ctx.globalAlpha = this.alpha;
                 ctx.beginPath();
                 ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
                 ctx.fillStyle = this.color;
+                ctx.shadowBlur = 10;
+                ctx.shadowColor = this.color;
                 ctx.fill();
                 ctx.restore();
             };
 
-            Particle.prototype.update = function() {
+            FireworkParticle.prototype.update = function() {
+                this.velocity.x *= this.friction;
+                this.velocity.y *= this.friction;
+                this.velocity.y += this.gravity;
                 this.x += this.velocity.x;
                 this.y += this.velocity.y;
-                this.alpha -= 0.015;
+                this.alpha -= this.decay;
             };
 
-            function createFirework() {
-                const x = Math.random() * canvas.width;
-                const y = Math.random() * (canvas.height * 0.6);
-                const colors = ['#ff0055', '#ff5050', '#ffc107', '#2196f3', '#e91e63'];
+            function createExplosion(x, y) {
+                const colors = ['#ff0055', '#ff5050', '#ffc107', '#00e676', '#29b6f6', '#e040fb', '#ffffff'];
                 const color = colors[Math.floor(Math.random() * colors.length)];
+                const particleCount = Math.floor(Math.random() * 40) + 60;
 
-                for (let i = 0; i < 40; i++) {
-                    particles.push(new Particle(x, y, color));
+                for (let i = 0; i < particleCount; i++) {
+                    particles.push(new FireworkParticle(x, y, color));
                 }
             }
 
-            let timer = 0;
+            let frame = 0;
             function animate() {
                 if (!fireworksActive) return;
                 requestAnimationFrame(animate);
+
                 ctx.fillStyle = 'rgba(0, 0, 0, 0.2)';
                 ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-                timer++;
-                if (timer % 20 === 0) createFirework();
+                frame++;
+                if (frame % 25 === 0) {
+                    const randomX = Math.random() * (canvas.width * 0.8) + (canvas.width * 0.1);
+                    const randomY = Math.random() * (canvas.height * 0.5) + (canvas.height * 0.1);
+                    createExplosion(randomX, randomY);
+                }
 
-                particles.forEach((particle, index) => {
-                    if (particle.alpha > 0) {
-                        particle.update();
-                        particle.draw();
-                    } else {
-                        particles.splice(index, 1);
+                for (let i = particles.length - 1; i >= 0; i--) {
+                    const p = particles[i];
+                    p.update();
+                    p.draw();
+                    if (p.alpha <= 0) {
+                        particles.splice(i, 1);
                     }
-                });
+                }
             }
 
             animate();
