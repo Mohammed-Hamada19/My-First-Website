@@ -598,7 +598,7 @@
         let musicStarted = false;
         let fireworksActive = false; 
 
-        // الأغنية الخاصة بصفحة القلب والألعاب النارية + تفعيل التكرار التلقائي (loop)
+        // الصوت الخاص بصفحة انفجار القلب والألعاب النارية المباشر
         const finalAudio = new Audio("https://files.catbox.moe/s600c5.mp3");
         finalAudio.preload = "auto";
         finalAudio.loop = true;
@@ -704,6 +704,7 @@
                 if (textHeartsInterval) clearInterval(textHeartsInterval);
                 textHeartsInterval = setInterval(createTextBgHeart, 750);
 
+                // تهيئة وتشغيل الصوت مبكراً لضمان عمله في المتصفحات
                 finalAudio.play().then(() => {
                     finalAudio.pause();
                     finalAudio.currentTime = 0;
@@ -900,11 +901,12 @@
 
             document.getElementById("beating-heart").style.display = "block";
             document.getElementById("love-text").style.display = "none";
-
-            finalAudio.currentTime = 0;
-            finalAudio.play().catch(e => console.log("Final audio error:", e));
-
-            startFireworks();
+            
+            // التأكد من إيقاف أي ألعاب نارية سابقة حتى يضغط على القلب
+            fireworksActive = false;
+            const canvas = document.getElementById("fireworks-canvas");
+            const ctx = canvas.getContext("2d");
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
         }
 
         function goBackFromFireworks() {
@@ -943,9 +945,14 @@
 
             heart.style.display = "none";
             document.getElementById("love-text").style.display = "block";
+
+            // تشغيل الصوت المباشر والألعاب النارية فقط لحظة الضغط على القلب
+            finalAudio.currentTime = 0;
+            finalAudio.play().catch(e => console.log("Final audio error:", e));
+
+            startFireworks();
         }
 
-        /* محاكاة للألعاب النارية في خلفية الكانفاس */
         function startFireworks() {
             const canvas = document.getElementById("fireworks-canvas");
             const ctx = canvas.getContext("2d");
