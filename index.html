@@ -10,16 +10,19 @@
             box-sizing: border-box;
         }
 
-        html,
-        body {
+        html, body {
             margin: 0;
             width: 100%;
             height: 100%;
             background: #000;
+        }
+
+        body {
             font-family: Arial, sans-serif;
         }
 
-        .page {
+        #startPage,
+        #welcomePage {
             width: 100%;
             height: 100vh;
             display: flex;
@@ -28,41 +31,34 @@
             flex-direction: column;
         }
 
-        /* الصفحة الأولى */
-        #page1 {
+        #startPage {
             background: #000;
         }
 
-        #enterBtn {
+        #startButton {
             padding: 18px 45px;
-            border: none;
+            border: 0;
             border-radius: 50px;
             background: #ff1744;
             color: white;
             font-size: 22px;
             font-weight: bold;
             cursor: pointer;
-            box-shadow: 0 0 30px rgba(255, 23, 68, 0.7);
         }
 
-        #enterBtn:active {
-            transform: scale(0.95);
-        }
-
-        /* الصفحة الثانية */
-        #page2 {
+        #welcomePage {
             display: none;
             background: #000;
             color: white;
-            text-align: center;
         }
 
-        #page2 h1 {
+        #welcomePage h1 {
+            margin: 0;
             font-size: 55px;
-            margin: 0 0 20px;
         }
 
         .heart {
+            margin-top: 20px;
             font-size: 80px;
             animation: beat 1s infinite;
         }
@@ -73,7 +69,7 @@
             }
 
             50% {
-                transform: scale(1.25);
+                transform: scale(1.2);
             }
         }
     </style>
@@ -81,46 +77,35 @@
 
 <body>
 
-    <!-- الصفحة الأولى -->
-    <div id="page1" class="page">
-        <button id="enterBtn">ادخل ❤️</button>
+    <div id="startPage">
+        <button id="startButton">ادخل ❤️</button>
     </div>
 
-    <!-- الصفحة الثانية -->
-    <div id="page2" class="page">
+    <div id="welcomePage">
         <h1>مرحبا</h1>
         <div class="heart">❤️</div>
     </div>
 
-    <!-- الأغنية -->
     <audio id="music" loop preload="auto">
-        <source
-            src="https://files.catbox.moe/4zig9x.mp4"
-            type="audio/mp4"
-        >
+        <source src="https://files.catbox.moe/4zig9x.mp4" type="audio/mp4">
     </audio>
 
     <script>
-        const enterBtn = document.getElementById("enterBtn");
-        const page1 = document.getElementById("page1");
-        const page2 = document.getElementById("page2");
+        const button = document.getElementById("startButton");
+        const startPage = document.getElementById("startPage");
+        const welcomePage = document.getElementById("welcomePage");
         const music = document.getElementById("music");
 
-        enterBtn.addEventListener("click", async function () {
+        button.onclick = function () {
+            startPage.style.display = "none";
+            welcomePage.style.display = "flex";
 
-            // إظهار الصفحة الثانية
-            page1.style.display = "none";
-            page2.style.display = "flex";
+            music.currentTime = 0;
 
-            // تشغيل الأغنية فورًا بعد ضغطة المستخدم
-            try {
-                music.currentTime = 0;
-                await music.play();
-            } catch (error) {
-                console.log("لم يتم تشغيل الأغنية:", error);
-            }
-
-        });
+            music.play().catch(function (error) {
+                console.log(error);
+            });
+        };
     </script>
 
 </body>
