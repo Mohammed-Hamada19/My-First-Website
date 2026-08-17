@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Romantic Presentation</title>
+
     <style>
         body {
             margin: 0;
@@ -19,7 +20,6 @@
             perspective: 1000px;
         }
 
-        /* حاوية القلوب المتساقطة لتكون فوق كل شيء لتستجيب للضغط */
         .falling-item {
             position: fixed;
             top: -20vh;
@@ -44,11 +44,15 @@
         }
 
         @keyframes fall {
-            0% { transform: translateY(0) rotate(0deg); }
-            100% { transform: translateY(125vh) rotate(360deg); }
+            0% {
+                transform: translateY(0) rotate(0deg);
+            }
+
+            100% {
+                transform: translateY(125vh) rotate(360deg);
+            }
         }
 
-        /* القلوب الكبيرة خلف النص في الصفحة الثانية */
         .text-bg-heart {
             position: absolute;
             user-select: none;
@@ -66,15 +70,21 @@
                 transform: translateY(110vh) scale(0.6) rotate(0deg);
                 opacity: 0;
             }
-            20% { opacity: 0.95; }
-            80% { opacity: 0.95; }
+
+            20% {
+                opacity: 0.95;
+            }
+
+            80% {
+                opacity: 0.95;
+            }
+
             100% {
                 transform: translateY(-20vh) scale(1.35) rotate(30deg);
                 opacity: 0;
             }
         }
 
-        /* تأثير ظهور كلمة بحبك عند الضغط على القلب */
         .pop-effect {
             position: fixed;
             font-size: 28px;
@@ -87,11 +97,17 @@
         }
 
         @keyframes popOut {
-            0% { transform: translate(-50%, -50%) scale(0.4); opacity: 1; }
-            100% { transform: translate(-50%, -120px) scale(1.6); opacity: 0; }
+            0% {
+                transform: translate(-50%, -50%) scale(0.4);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translate(-50%, -120px) scale(1.6);
+                opacity: 0;
+            }
         }
 
-        /* حاوية كلمة السر */
         #pass-wrapper {
             position: relative;
             display: flex;
@@ -140,7 +156,9 @@
             transition: transform 0.2s;
         }
 
-        #pass-btn:active { transform: scale(0.96); }
+        #pass-btn:active {
+            transform: scale(0.96);
+        }
 
         #error-msg {
             color: #ff4d4d;
@@ -196,7 +214,9 @@
             transform: scale(1.05);
         }
 
-        .action-btn:active { transform: scale(0.95); }
+        .action-btn:active {
+            transform: scale(0.95);
+        }
 
         .text-display-box {
             position: relative;
@@ -214,7 +234,9 @@
             font-weight: 600;
             font-size: 28px;
             color: #ffffff;
-            text-shadow: 0 0 14px rgba(255, 255, 255, 0.9), 0 0 25px rgba(255, 255, 255, 0.4);
+            text-shadow:
+                0 0 14px rgba(255, 255, 255, 0.9),
+                0 0 25px rgba(255, 255, 255, 0.4);
             line-height: 1.6;
             width: 100%;
             opacity: 0;
@@ -231,11 +253,18 @@
             color: #ffffff;
         }
 
-        .msg-text.finished::after { content: ''; }
+        .msg-text.finished::after {
+            content: '';
+        }
 
         @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0; }
+            0%, 100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0;
+            }
         }
 
         .float-up-exit {
@@ -243,8 +272,17 @@
         }
 
         @keyframes floatToCeiling {
-            0% { transform: translateY(0) scale(1); opacity: 1; filter: blur(0px); }
-            100% { transform: translateY(-140px) scale(0.9); opacity: 0; filter: blur(4px); }
+            0% {
+                transform: translateY(0) scale(1);
+                opacity: 1;
+                filter: blur(0px);
+            }
+
+            100% {
+                transform: translateY(-140px) scale(0.9);
+                opacity: 0;
+                filter: blur(4px);
+            }
         }
 
         .flip-emoji {
@@ -271,7 +309,7 @@
             height: 120px;
             background: linear-gradient(145deg, #ff1744, #b71c1c);
             transform: rotate(-45deg);
-            box-shadow: 
+            box-shadow:
                 0 15px 35px rgba(255, 23, 68, 0.6),
                 inset -5px -5px 15px rgba(0, 0, 0, 0.4),
                 inset 5px 5px 15px rgba(255, 255, 255, 0.5);
@@ -292,8 +330,15 @@
             box-shadow: inset 5px 5px 15px rgba(255, 255, 255, 0.4);
         }
 
-        .heart-3d::before { top: -60px; left: 0; }
-        .heart-3d::after { left: 60px; top: 0; }
+        .heart-3d::before {
+            top: -60px;
+            left: 0;
+        }
+
+        .heart-3d::after {
+            left: 60px;
+            top: 0;
+        }
 
         .heart-text-3d {
             position: absolute;
@@ -302,22 +347,40 @@
             color: #ffffff;
             font-size: 22px;
             font-weight: 800;
-            text-shadow: 0 3px 8px rgba(0, 0, 0, 0.7), 0 0 12px rgba(255, 255, 255, 0.8);
+            text-shadow:
+                0 3px 8px rgba(0, 0, 0, 0.7),
+                0 0 12px rgba(255, 255, 255, 0.8);
             font-family: 'Segoe UI', Arial, sans-serif;
             letter-spacing: 1.5px;
             white-space: nowrap;
         }
 
         @keyframes heartBeat3D {
-            0% { transform: scale(1) rotateX(0deg) rotateY(0deg); }
-            15% { transform: scale(1.2) rotateX(12deg) rotateY(-12deg); }
-            30% { transform: scale(1) rotateX(0deg) rotateY(0deg); }
-            45% { transform: scale(1.15) rotateX(-8deg) rotateY(8deg); }
-            60% { transform: scale(1) rotateX(0deg) rotateY(0deg); }
-            100% { transform: scale(1) rotateX(0deg) rotateY(0deg); }
+            0% {
+                transform: scale(1) rotateX(0deg) rotateY(0deg);
+            }
+
+            15% {
+                transform: scale(1.2) rotateX(12deg) rotateY(-12deg);
+            }
+
+            30% {
+                transform: scale(1) rotateX(0deg) rotateY(0deg);
+            }
+
+            45% {
+                transform: scale(1.15) rotateX(-8deg) rotateY(8deg);
+            }
+
+            60% {
+                transform: scale(1) rotateX(0deg) rotateY(0deg);
+            }
+
+            100% {
+                transform: scale(1) rotateX(0deg) rotateY(0deg);
+            }
         }
 
-        /* صفحة عرض الفيديو */
         #final-destination-page {
             display: none;
             position: fixed;
@@ -398,7 +461,9 @@
             transition: all 0.3s ease;
         }
 
-        .skip-video-btn-styled:active { transform: scale(0.95); }
+        .skip-video-btn-styled:active {
+            transform: scale(0.95);
+        }
 
         #continue-container {
             display: none;
@@ -426,9 +491,20 @@
         }
 
         @keyframes pulseBtn {
-            0% { transform: scale(1); box-shadow: 0 0 20px rgba(255, 0, 85, 0.6); }
-            50% { transform: scale(1.08); box-shadow: 0 0 40px rgba(255, 0, 85, 1); }
-            100% { transform: scale(1); box-shadow: 0 0 20px rgba(255, 0, 85, 0.6); }
+            0% {
+                transform: scale(1);
+                box-shadow: 0 0 20px rgba(255, 0, 85, 0.6);
+            }
+
+            50% {
+                transform: scale(1.08);
+                box-shadow: 0 0 40px rgba(255, 0, 85, 1);
+            }
+
+            100% {
+                transform: scale(1);
+                box-shadow: 0 0 20px rgba(255, 0, 85, 0.6);
+            }
         }
 
         #fireworks-page {
@@ -474,8 +550,13 @@
         }
 
         @keyframes bigBeat {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.25); }
+            0%, 100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.25);
+            }
         }
 
         .love-forever-text {
@@ -487,7 +568,7 @@
             z-index: 2003;
             line-height: 1.8;
             padding: 0 20px;
-            text-shadow: 
+            text-shadow:
                 0 0 10px #ff0055,
                 0 0 20px #ff0055,
                 0 0 40px #ff0055;
@@ -496,8 +577,15 @@
         }
 
         @keyframes glowText {
-            from { transform: scale(0.95); opacity: 0.85; }
-            to { transform: scale(1.05); opacity: 1; }
+            from {
+                transform: scale(0.95);
+                opacity: 0.85;
+            }
+
+            to {
+                transform: scale(1.05);
+                opacity: 1;
+            }
         }
 
         .heart-shard {
@@ -509,607 +597,2221 @@
         }
 
         @keyframes explodeShard {
-            0% { transform: translate(0, 0) scale(1) rotate(0deg); opacity: 1; }
-            100% { transform: translate(var(--dx), var(--dy)) scale(0) rotate(720deg); opacity: 0; }
+            0% {
+                transform: translate(0, 0) scale(1) rotate(0deg);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translate(var(--dx), var(--dy)) scale(0) rotate(720deg);
+                opacity: 0;
+            }
         }
     </style>
 </head>
+
 <body>
 
-    <audio id="bg-music" src="https://files.catbox.moe/89hazq.mp3" preload="auto"></audio>
+    <!-- موسيقى الخلفية -->
+    <audio
+        id="bg-music"
+        preload="auto"
+        playsinline
+        crossorigin="anonymous">
+        <source
+            src="https://files.catbox.moe/89hazq.mp3"
+            type="audio/mpeg">
+    </audio>
 
-    <!-- الصفحة الأولى (كلمة السر) -->
+    <!-- الصفحة الأولى -->
     <div id="pass-wrapper">
         <div id="pass-container">
-            <input type="password" id="pass-input" placeholder="أدخل كلمة السر">
-            <button id="pass-btn" onclick="checkPassword()">دخول</button>
-            <p id="error-msg">كلمة السر غير صحيحة!</p>
+
+            <input
+                type="password"
+                id="pass-input"
+                placeholder="أدخل كلمة السر"
+                autocomplete="off">
+
+            <button id="pass-btn" onclick="checkPassword()">
+                دخول
+            </button>
+
+            <p id="error-msg">
+                كلمة السر غير صحيحة!
+            </p>
+
         </div>
     </div>
 
-    <!-- الصفحة الثانية (كتابة النصوص) -->
+    <!-- الصفحة الثانية -->
     <div id="new-page">
+
         <div class="top-controls">
-            <button class="action-btn" onclick="goToMainPage()">⬅️ الصفحة السابقة</button>
-            <button id="skip-btn" class="action-btn" onclick="skipTypewriter()">تخطي ⏩</button>
+
+            <button
+                class="action-btn"
+                onclick="goToMainPage()">
+                ⬅️ الصفحة السابقة
+            </button>
+
+            <button
+                id="skip-btn"
+                class="action-btn"
+                onclick="skipTypewriter()">
+                تخطي ⏩
+            </button>
+
         </div>
 
         <div class="text-display-box" id="single-box">
-            <div id="typewriter-text" class="msg-text"></div>
-            
-            <button id="for-you-btn" onclick="goToFinalPage()">
+
+            <div
+                id="typewriter-text"
+                class="msg-text">
+            </div>
+
+            <button
+                id="for-you-btn"
+                onclick="goToFinalPage()">
+
                 <div class="heart-3d">
-                    <span class="heart-text-3d">For You</span>
+                    <span class="heart-text-3d">
+                        For You
+                    </span>
                 </div>
+
             </button>
+
         </div>
     </div>
 
-    <!-- صفحة عرض الفيديو -->
+    <!-- صفحة الفيديو -->
     <div id="final-destination-page">
-        <div class="video-container" id="vid-wrapper">
-            <video id="main-video" controls playsinline preload="auto">
-                <source src="https://files.catbox.moe/cd4vny.mp4" type="video/mp4">
+
+        <div
+            class="video-container"
+            id="vid-wrapper">
+
+            <video
+                id="main-video"
+                controls
+                playsinline
+                webkit-playsinline
+                preload="auto">
+
+                <source
+                    src="https://files.catbox.moe/cd4vny.mp4"
+                    type="video/mp4">
+
                 المتصفح لا يدعم هذا الفيديو.
+
             </video>
+
         </div>
 
-        <div id="nav-wrapper" class="bottom-floating-controls">
-            <button class="nav-btn" onclick="goBackToPreviousPageFromVideo()">
+        <div
+            id="nav-wrapper"
+            class="bottom-floating-controls">
+
+            <button
+                class="nav-btn"
+                onclick="goBackToPreviousPageFromVideo()">
                 ⬅️ الصفحة السابقة
             </button>
-            <button class="skip-video-btn-styled" onclick="skipVideo()">
+
+            <button
+                class="skip-video-btn-styled"
+                onclick="skipVideo()">
                 تخطي الفيديو ⏩
             </button>
+
         </div>
 
         <div id="continue-container">
-            <button id="continue-btn" onclick="goToFireworksPage()">كمل 😘</button>
-            <button class="action-btn" onclick="goBackFromContinueScreen()">⬅️ الصفحة السابقة</button>
+
+            <button
+                id="continue-btn"
+                onclick="goToFireworksPage()">
+                كمل 😘
+            </button>
+
+            <button
+                class="action-btn"
+                onclick="goBackFromContinueScreen()">
+                ⬅️ الصفحة السابقة
+            </button>
+
         </div>
+
     </div>
 
     <!-- الصفحة الأخيرة -->
     <div id="fireworks-page">
-        <button class="action-btn fireworks-back-btn" onclick="goBackFromFireworks()">⬅️ الصفحة السابقة</button>
+
+        <button
+            class="action-btn fireworks-back-btn"
+            onclick="goBackFromFireworks()">
+            ⬅️ الصفحة السابقة
+        </button>
+
         <canvas id="fireworks-canvas"></canvas>
-        <div id="beating-heart" class="big-beating-heart" onclick="explodeHeart()">❤️</div>
-        <div id="love-text" class="love-forever-text">
-      
-            انتي مش بس حبيبتي انتي كل حاجه في حياتي.سكره ايامي <br>
-           خليكي عارفه مفيش اغلي منك في حياتي واني مش مستعد اخسرك ابدا انتي بنتي وحبيبتي وحب عمري ومراتي المستقبليه <br>
-           ربنا يقدرني واقدر اسعدك والففك الدنيا كلها واكونلك نعم السند <br>
-          خليكي عارفه هفضل احبك طول العمر ومش هبطل احبك عشان انتي بجد تستاهلي كل الحب وبس تستاهلي كل الخير وبس <br>
-            هديكي كل الحب والتقدير الي ف الدنيا عشان انتي بجد تستاهليه هلففك الدنيا وهخليهم يحسدوكي <br>
-           رغم هرموناتك هفضل احبك بكل حالاتك المجنونه والنكديه والسحلانه والمتعصبه والمجنونه والطفوليه ....رغم ان الحاجات دي مش فيكي (الطيب احسن) <br>
-           بحبكككككككككككك <span style="display:inline-block; animation: bigBeat 1.1s infinite ease-in-out;">❤️</span>
+
+        <div
+            id="beating-heart"
+            class="big-beating-heart"
+            onclick="explodeHeart()">
+            ❤️
+        </div>
+
+        <div
+            id="love-text"
+            class="love-forever-text">
+
+            انتي مش بس حبيبتي انتي كل حاجه في حياتي.سكره ايامي
+            <br>
+
+            خليكي عارفه مفيش اغلي منك في حياتي واني مش مستعد اخسرك ابدا انتي بنتي وحبيبتي وحب عمري ومراتي المستقبليه
+            <br>
+
+            ربنا يقدرني واقدر اسعدك والففك الدنيا كلها واكونلك نعم السند
+            <br>
+
+            خليكي عارفه هفضل احبك طول العمر ومش هبطل احبك عشان انتي بجد تستاهلي كل الحب وبس تستاهلي كل الخير وبس
+            <br>
+
+            هديكي كل الحب والتقدير الي ف الدنيا عشان انتي بجد تستاهليه هلففك الدنيا وهخليهم يحسدوكي
+            <br>
+
+            رغم هرموناتك هفضل احبك بكل حالاتك المجنونه والنكديه والسحلانه والمتعصبه والمجنونه والطفوليه ....
+            رغم ان الحاجات دي مش فيكي (الطيب احسن)
+            <br>
+
+            بحبكككككككككككك
+            <span style="display:inline-block; animation: bigBeat 1.1s infinite ease-in-out;">
+                ❤️
+            </span>
+
         </div>
     </div>
 
     <script>
-        let currentStage = "main"; 
+
+        /* =========================================================
+           VARIABLES
+        ========================================================= */
+
+        let currentStage = "main";
+
         let currentTimer = null;
         let currentTimeout1 = null;
         let currentTimeout2 = null;
+
         let textHeartsInterval = null;
         let mainFallingInterval = null;
-        let musicStarted = false;
-        let fireworksActive = false; 
 
-        const finalAudio = new Audio("https://files.catbox.moe/4zig9x.mp4");
+        let musicStarted = false;
+        let fireworksActive = false;
+
+        /*
+         * ملاحظة:
+         * هذا الملف عندك MP4 ويتم تشغيله كصوت.
+         * تركته كما هو حتى لا أغيّر الأغنية.
+         *
+         * الأفضل مستقبلًا تحويله إلى MP3.
+         */
+        const finalAudio = new Audio(
+            "https://files.catbox.moe/4zig9x.mp4"
+        );
+
         finalAudio.preload = "auto";
-        finalAudio.loop = true; // جعل الأغنية تتكرر تلقائياً بلا نهاية
+        finalAudio.loop = true;
+        finalAudio.playsInline = true;
 
         const messages = [
-            { text: "1", speed: 30, delay: 300 },
-            { text: "2", speed: 30, delay: 300 },
-            { text: "3", speed: 30, delay: 300 },
-            { text: "كملت الـ 20 ياصغنن ?!", speed: 110, delay: 1800 },
-            { text: "كملنا 16 سنه سوا ?!" },
-            { text: "يااااااااه كبرنا اوي كدا" },
-            { text: "دانتي لسه كنتي بتلعبي قدامي فتحي ياورده" },
-            { text: "دانا لسه عادلك القصه في وسط ذهول وصمت العيال اكننا ابطال في قصه والاضواء علينا" },
-            { text: "....................", speed: 110, delay: 1800 },
-            { text: "هانت وهنبقا الابطال وهنحقق الحلم ياحبيبي" },
-            { text: "الي عدلك القصه وانتو عيال هيعدلهالك قريب في بيتكو وانتي بتطبخيلو او وانتي شايله ابنه ايهما اقرب 😂❤️" },
-            { text: "16 سنه سوا ولسه مكملين الي ∞" },
-            { text: "هنعيش سوا ونكبر سوا ونعجز سوا" },
-            { text: "كل سنه وانتي معايا" },
-            { text: " كل سنه وانتي حبيبتي" },
-            { text: "كل سنه وانتي بنتي " },
-            { text: "كل سنه وانتي مراتي " },
-            { text: "العمر كله ياااا" },
-            { text: "My Breaaaaaaaaaaaaaath <span class='flip-emoji'>😍</span>", isHTML: true }
+
+            {
+                text: "1",
+                speed: 30,
+                delay: 300
+            },
+
+            {
+                text: "2",
+                speed: 30,
+                delay: 300
+            },
+
+            {
+                text: "3",
+                speed: 30,
+                delay: 300
+            },
+
+            {
+                text: "كملت الـ 20 ياصغنن ?!",
+                speed: 110,
+                delay: 1800
+            },
+
+            {
+                text: "كملنا 16 سنه سوا ?!"
+            },
+
+            {
+                text: "يااااااااه كبرنا اوي كدا"
+            },
+
+            {
+                text: "دانتي لسه كنتي بتلعبي قدامي فتحي ياورده"
+            },
+
+            {
+                text: "دانا لسه عادلك القصه في وسط ذهول وصمت العيال اكننا ابطال في قصه والاضواء علينا"
+            },
+
+            {
+                text: "....................",
+                speed: 110,
+                delay: 1800
+            },
+
+            {
+                text: "هانت وهنبقا الابطال وهنحقق الحلم ياحبيبي"
+            },
+
+            {
+                text: "الي عدلك القصه وانتو عيال هيعدلهالك قريب في بيتكو وانتي بتطبخيلو او وانتي شايله ابنه ايهما اقرب 😂❤️"
+            },
+
+            {
+                text: "16 سنه سوا ولسه مكملين الي ∞"
+            },
+
+            {
+                text: "هنعيش سوا ونكبر سوا ونعجز سوا"
+            },
+
+            {
+                text: "كل سنه وانتي معايا"
+            },
+
+            {
+                text: " كل سنه وانتي حبيبتي"
+            },
+
+            {
+                text: "كل سنه وانتي بنتي "
+            },
+
+            {
+                text: "كل سنه وانتي مراتي "
+            },
+
+            {
+                text: "العمر كله ياااا"
+            },
+
+            {
+                text: "My Breaaaaaaaaaaaaaath 😍",
+                isHTML: true
+            }
+
         ];
 
         let currentMsgIndex = 0;
-        const textElement = document.getElementById("typewriter-text");
 
-        function createMainFallingHeart() {
-            if (currentStage !== "main") return;
+        const textElement =
+            document.getElementById("typewriter-text");
 
-            const heart = document.createElement("div");
-            heart.classList.add("falling-item", "falling-heart");
-            heart.innerHTML = "❤️";
-            
-            heart.style.left = Math.random() * 90 + "vw";
-            const duration = Math.random() * 2.5 + 4;
-            heart.style.animationDuration = duration + "s";
 
-            const removalTimeout = setTimeout(() => { heart.remove(); }, duration * 1000);
+        /* =========================================================
+           AUDIO HELPERS
+        ========================================================= */
 
-            function popHeart(e) {
-                e.stopPropagation();
-                e.preventDefault();
-                clearTimeout(removalTimeout);
+        function getBackgroundMusic() {
+            return document.getElementById("bg-music");
+        }
 
-                const rect = heart.getBoundingClientRect();
-                const x = rect.left + rect.width / 2;
-                const y = rect.top + rect.height / 2;
 
-                const popText = document.createElement("div");
-                popText.classList.add("pop-effect");
-                popText.innerText = "بحبك";
-                popText.style.left = x + "px";
-                popText.style.top = y + "px";
-                
-                document.body.appendChild(popText);
-                setTimeout(() => { popText.remove(); }, 700);
-                heart.remove();
+        /*
+         * محاولة تجهيز ملفات الصوت.
+         * يتم استدعاؤها بعد تفاعل المستخدم.
+         */
+        function unlockAudio() {
+
+            const music = getBackgroundMusic();
+
+            if (music) {
+
+                try {
+
+                    music.load();
+
+                } catch (error) {
+
+                    console.log(
+                        "Background audio load error:",
+                        error
+                    );
+
+                }
+
             }
 
-            heart.addEventListener('mousedown', popHeart);
-            heart.addEventListener('touchstart', popHeart, {passive: false});
-            heart.addEventListener('click', popHeart);
+            /*
+             * نحاول تجهيز finalAudio أيضًا.
+             * لا نشغله فعليًا هنا حتى لا نزعج المستخدم.
+             */
+            try {
 
-            document.body.appendChild(heart);
+                finalAudio.load();
+
+            } catch (error) {
+
+                console.log(
+                    "Final audio load error:",
+                    error
+                );
+
+            }
         }
 
-        mainFallingInterval = setInterval(createMainFallingHeart, 250);
 
-        function createTextBgHeart() {
-            if (currentStage !== "typing") return;
+        /*
+         * تشغيل موسيقى الخلفية.
+         *
+         * التعديل المهم:
+         * musicStarted = true
+         * يتم وضعها فقط بعد نجاح play().
+         */
+        async function playMusic() {
 
-            const heart = document.createElement("div");
-            heart.classList.add("text-bg-heart");
-            heart.innerHTML = "❤️";
-            
-            heart.style.left = Math.random() * 75 + 10 + "vw";
-            const size = Math.random() * 60 + 100;
-            heart.style.fontSize = size + "px";
+            const music = getBackgroundMusic();
 
-            document.body.appendChild(heart);
+            if (!music) {
+                return false;
+            }
 
-            setTimeout(() => { heart.remove(); }, 5500);
-        }
+            try {
 
-        function checkPassword() {
-            const input = document.getElementById("pass-input").value;
-            const errorMsg = document.getElementById("error-msg");
-            
-            if (input === "1948") {
-                currentStage = "typing";
-                document.getElementById("pass-wrapper").style.display = "none";
-                document.getElementById("new-page").style.display = "flex";
-                document.getElementById("skip-btn").style.display = "block";
-                document.getElementById("for-you-btn").style.display = "none";
-                textElement.style.display = "block";
+                if (music.readyState === 0) {
+                    music.load();
+                }
 
-                currentMsgIndex = 0;
+                /*
+                 * لا نعيدها للصفر إذا كانت بالفعل تعمل.
+                 */
+                if (music.paused) {
+
+                    const playPromise = music.play();
+
+                    if (playPromise !== undefined) {
+                        await playPromise;
+                    }
+
+                }
+
+                musicStarted = true;
+
+                return true;
+
+            } catch (error) {
+
                 musicStarted = false;
 
-                if (textHeartsInterval) clearInterval(textHeartsInterval);
-                textHeartsInterval = setInterval(createTextBgHeart, 750);
+                console.log(
+                    "Audio play error:",
+                    error
+                );
 
-                finalAudio.play().then(() => {
-                    finalAudio.pause();
-                    finalAudio.currentTime = 0;
-                }).catch(e => console.log("Unlock audio:", e));
-
-                playMusic();
-
-                setTimeout(startTypewriterSequence, 300);
-            } else {
-                errorMsg.style.display = "block";
+                return false;
             }
         }
 
-        document.getElementById("pass-input").addEventListener("keypress", function(event) {
-            if (event.key === "Enter") checkPassword();
-        });
 
-        function playMusic() {
-            if (!musicStarted) {
-                const music = document.getElementById('bg-music');
-                if (music) {
+        /*
+         * إيقاف موسيقى الخلفية بالكامل.
+         */
+        function stopMusic() {
+
+            const music = getBackgroundMusic();
+
+            if (music) {
+
+                try {
+
+                    music.pause();
                     music.currentTime = 0;
-                    music.play().catch(e => console.log("Audio play error:", e));
-                    musicStarted = true;
+
+                } catch (error) {
+
+                    console.log(
+                        "Audio stop error:",
+                        error
+                    );
+
                 }
             }
-        }
 
-        function stopMusic() {
-            const music = document.getElementById('bg-music');
-            if (music) {
-                music.pause();
-            }
             musicStarted = false;
         }
 
-        function clearTypewriterTimers() {
-            if (currentTimer) clearInterval(currentTimer);
-            if (currentTimeout1) clearTimeout(currentTimeout1);
-            if (currentTimeout2) clearTimeout(currentTimeout2);
+
+        /*
+         * تشغيل finalAudio
+         */
+        async function playFinalAudio() {
+
+            try {
+
+                if (finalAudio.readyState === 0) {
+                    finalAudio.load();
+                }
+
+                const playPromise = finalAudio.play();
+
+                if (playPromise !== undefined) {
+                    await playPromise;
+                }
+
+                console.log(
+                    "Final audio started successfully."
+                );
+
+                return true;
+
+            } catch (error) {
+
+                console.log(
+                    "Final audio play error:",
+                    error
+                );
+
+                return false;
+            }
         }
 
-        function startTypewriterSequence() {
-            if (currentMsgIndex >= messages.length) {
-                finishTypewriterAndShowHeart();
+
+        /*
+         * إيقاف finalAudio
+         */
+        function stopFinalAudio() {
+
+            try {
+
+                finalAudio.pause();
+                finalAudio.currentTime = 0;
+
+            } catch (error) {
+
+                console.log(
+                    "Final audio stop error:",
+                    error
+                );
+
+            }
+        }
+
+
+        /* =========================================================
+           FALLING HEARTS
+        ========================================================= */
+
+        function createMainFallingHeart() {
+
+            if (currentStage !== "main") {
                 return;
             }
 
-            const currentObj = messages[currentMsgIndex];
-            const fullText = currentObj.text;
-            const typeSpeed = currentObj.speed || 85; 
-            const pauseDelay = currentObj.delay || 2200; 
+            const heart = document.createElement("div");
 
-            textElement.className = "msg-text";
-            textElement.style.opacity = "1";
-            textElement.innerHTML = "";
+            heart.classList.add(
+                "falling-item",
+                "falling-heart"
+            );
+
+            heart.innerHTML = "❤️";
+
+            heart.style.left =
+                Math.random() * 90 + "vw";
+
+            const duration =
+                Math.random() * 2.5 + 4;
+
+            heart.style.animationDuration =
+                duration + "s";
+
+            const removalTimeout = setTimeout(
+                () => {
+
+                    if (heart.parentNode) {
+                        heart.remove();
+                    }
+
+                },
+                duration * 1000
+            );
+
+
+            function popHeart(e) {
+
+                e.stopPropagation();
+
+                if (e.cancelable) {
+                    e.preventDefault();
+                }
+
+                clearTimeout(removalTimeout);
+
+                const rect =
+                    heart.getBoundingClientRect();
+
+                const x =
+                    rect.left +
+                    rect.width / 2;
+
+                const y =
+                    rect.top +
+                    rect.height / 2;
+
+
+                const popText =
+                    document.createElement("div");
+
+                popText.classList.add(
+                    "pop-effect"
+                );
+
+                popText.innerText =
+                    "بحبك";
+
+                popText.style.left =
+                    x + "px";
+
+                popText.style.top =
+                    y + "px";
+
+
+                document.body.appendChild(
+                    popText
+                );
+
+
+                setTimeout(() => {
+
+                    if (popText.parentNode) {
+                        popText.remove();
+                    }
+
+                }, 700);
+
+
+                if (heart.parentNode) {
+                    heart.remove();
+                }
+            }
+
+
+            /*
+             * استخدمنا pointerdown بدل تكرار
+             * mousedown + touchstart + click.
+             *
+             * هذا يقلل تكرار الضغط على الموبايل.
+             */
+            heart.addEventListener(
+                "pointerdown",
+                popHeart
+            );
+
+
+            document.body.appendChild(
+                heart
+            );
+        }
+
+
+        mainFallingInterval =
+            setInterval(
+                createMainFallingHeart,
+                250
+            );
+
+
+        /* =========================================================
+           TEXT BACKGROUND HEARTS
+        ========================================================= */
+
+        function createTextBgHeart() {
+
+            if (currentStage !== "typing") {
+                return;
+            }
+
+            const heart =
+                document.createElement("div");
+
+            heart.classList.add(
+                "text-bg-heart"
+            );
+
+            heart.innerHTML = "❤️";
+
+            heart.style.left =
+                Math.random() * 75 + 10 + "vw";
+
+            const size =
+                Math.random() * 60 + 100;
+
+            heart.style.fontSize =
+                size + "px";
+
+            document.body.appendChild(
+                heart
+            );
+
+
+            setTimeout(() => {
+
+                if (heart.parentNode) {
+                    heart.remove();
+                }
+
+            }, 5500);
+        }
+
+
+        /* =========================================================
+           PASSWORD
+        ========================================================= */
+
+        async function checkPassword() {
+
+            const input =
+                document.getElementById(
+                    "pass-input"
+                ).value;
+
+            const errorMsg =
+                document.getElementById(
+                    "error-msg"
+                );
+
+
+            /*
+             * أول شيء:
+             * نستغل ضغطة المستخدم لتجهيز الصوت.
+             */
+            unlockAudio();
+
+
+            if (input === "1948") {
+
+                currentStage = "typing";
+
+                document.getElementById(
+                    "pass-wrapper"
+                ).style.display = "none";
+
+
+                document.getElementById(
+                    "new-page"
+                ).style.display = "flex";
+
+
+                document.getElementById(
+                    "skip-btn"
+                ).style.display = "block";
+
+
+                document.getElementById(
+                    "for-you-btn"
+                ).style.display = "none";
+
+
+                textElement.style.display =
+                    "block";
+
+
+                currentMsgIndex = 0;
+
+                musicStarted = false;
+
+
+                if (textHeartsInterval) {
+
+                    clearInterval(
+                        textHeartsInterval
+                    );
+
+                }
+
+
+                textHeartsInterval =
+                    setInterval(
+                        createTextBgHeart,
+                        750
+                    );
+
+
+                /*
+                 * محاولة تشغيل الموسيقى مباشرة
+                 * لأن checkPassword جاء من user gesture.
+                 */
+                await playMusic();
+
+
+                /*
+                 * تجهيز finalAudio بدون تشغيله.
+                 */
+                try {
+
+                    if (finalAudio.readyState === 0) {
+                        finalAudio.load();
+                    }
+
+                } catch (error) {
+
+                    console.log(
+                        "Final audio preload error:",
+                        error
+                    );
+
+                }
+
+
+                setTimeout(
+                    startTypewriterSequence,
+                    300
+                );
+
+            } else {
+
+                errorMsg.style.display =
+                    "block";
+            }
+        }
+
+
+        /* =========================================================
+           ENTER KEY
+        ========================================================= */
+
+        document
+            .getElementById("pass-input")
+            .addEventListener(
+                "keydown",
+                function(event) {
+
+                    if (event.key === "Enter") {
+                        checkPassword();
+                    }
+
+                }
+            );
+
+
+        /* =========================================================
+           TYPEWRITER
+        ========================================================= */
+
+        function clearTypewriterTimers() {
+
+            if (currentTimer) {
+                clearInterval(currentTimer);
+                currentTimer = null;
+            }
+
+            if (currentTimeout1) {
+                clearTimeout(currentTimeout1);
+                currentTimeout1 = null;
+            }
+
+            if (currentTimeout2) {
+                clearTimeout(currentTimeout2);
+                currentTimeout2 = null;
+            }
+        }
+
+
+        function startTypewriterSequence() {
+
+            if (
+                currentMsgIndex >=
+                messages.length
+            ) {
+
+                finishTypewriterAndShowHeart();
+
+                return;
+            }
+
+
+            const currentObj =
+                messages[currentMsgIndex];
+
+            const fullText =
+                currentObj.text;
+
+            const typeSpeed =
+                currentObj.speed || 85;
+
+            const pauseDelay =
+                currentObj.delay || 2200;
+
+
+            textElement.className =
+                "msg-text";
+
+            textElement.style.opacity =
+                "1";
+
+            textElement.innerHTML =
+                "";
+
 
             let charIndex = 0;
 
+
             if (currentObj.isHTML) {
-                let plainText = "My Breaaaaaaaaaaaaaaaaath ";
-                currentTimer = setInterval(() => {
-                    textElement.innerHTML = plainText.substring(0, charIndex);
-                    charIndex++;
-                    if (charIndex > plainText.length) {
-                        clearInterval(currentTimer);
-                        textElement.innerHTML = plainText + "<span class='flip-emoji'>😍</span>";
-                        textElement.classList.add("finished");
-                        currentTimeout1 = setTimeout(() => {
-                            textElement.classList.add("float-up-exit");
-                            currentTimeout2 = setTimeout(() => {
-                                currentMsgIndex++;
-                                startTypewriterSequence();
-                            }, 1300);
-                        }, pauseDelay);
-                    }
-                }, typeSpeed);
+
+                const plainText =
+                    "My Breaaaaaaaaaaaaaaaaath ";
+
+                currentTimer =
+                    setInterval(() => {
+
+                        textElement.innerHTML =
+                            plainText.substring(
+                                0,
+                                charIndex
+                            );
+
+                        charIndex++;
+
+
+                        if (
+                            charIndex >
+                            plainText.length
+                        ) {
+
+                            clearInterval(
+                                currentTimer
+                            );
+
+                            currentTimer = null;
+
+
+                            textElement.innerHTML =
+                                plainText +
+                                "<span class='flip-emoji'>😍</span>";
+
+
+                            textElement.classList.add(
+                                "finished"
+                            );
+
+
+                            currentTimeout1 =
+                                setTimeout(() => {
+
+                                    textElement.classList.add(
+                                        "float-up-exit"
+                                    );
+
+
+                                    currentTimeout2 =
+                                        setTimeout(() => {
+
+                                            currentMsgIndex++;
+
+                                            startTypewriterSequence();
+
+                                        }, 1300);
+
+                                }, pauseDelay);
+
+                        }
+
+                    }, typeSpeed);
+
             } else {
-                currentTimer = setInterval(() => {
-                    textElement.textContent = fullText.substring(0, charIndex);
-                    charIndex++;
-                    if (charIndex > fullText.length) {
-                        clearInterval(currentTimer);
-                        textElement.classList.add("finished");
-                        currentTimeout1 = setTimeout(() => {
-                            textElement.classList.add("float-up-exit");
-                            currentTimeout2 = setTimeout(() => {
-                                currentMsgIndex++;
-                                startTypewriterSequence();
-                            }, 1300);
-                        }, pauseDelay);
-                    }
-                }, typeSpeed);
+
+                currentTimer =
+                    setInterval(() => {
+
+                        textElement.textContent =
+                            fullText.substring(
+                                0,
+                                charIndex
+                            );
+
+                        charIndex++;
+
+
+                        if (
+                            charIndex >
+                            fullText.length
+                        ) {
+
+                            clearInterval(
+                                currentTimer
+                            );
+
+                            currentTimer = null;
+
+
+                            textElement.classList.add(
+                                "finished"
+                            );
+
+
+                            currentTimeout1 =
+                                setTimeout(() => {
+
+                                    textElement.classList.add(
+                                        "float-up-exit"
+                                    );
+
+
+                                    currentTimeout2 =
+                                        setTimeout(() => {
+
+                                            currentMsgIndex++;
+
+                                            startTypewriterSequence();
+
+                                        }, 1300);
+
+                                }, pauseDelay);
+
+                        }
+
+                    }, typeSpeed);
             }
         }
 
+
         function skipTypewriter() {
+
             clearTypewriterTimers();
+
+            /*
+             * محاولة إبقاء الصوت شغال.
+             */
             playMusic();
+
             finishTypewriterAndShowHeart();
         }
 
-        function finishTypewriterAndShowHeart() {
-            currentStage = "finished";
-            document.getElementById("skip-btn").style.display = "none";
-            textElement.style.display = "none";
-            
-            if (textHeartsInterval) clearInterval(textHeartsInterval);
-            document.querySelectorAll('.text-bg-heart').forEach(el => el.remove());
 
-            document.getElementById("for-you-btn").style.display = "block";
+        function finishTypewriterAndShowHeart() {
+
+            currentStage = "finished";
+
+            document.getElementById(
+                "skip-btn"
+            ).style.display = "none";
+
+
+            textElement.style.display =
+                "none";
+
+
+            if (textHeartsInterval) {
+
+                clearInterval(
+                    textHeartsInterval
+                );
+
+                textHeartsInterval = null;
+            }
+
+
+            document
+                .querySelectorAll(
+                    ".text-bg-heart"
+                )
+                .forEach(el => el.remove());
+
+
+            document.getElementById(
+                "for-you-btn"
+            ).style.display = "block";
         }
+
+
+        /* =========================================================
+           BACK TO MAIN
+        ========================================================= */
 
         function goToMainPage() {
-            clearTypewriterTimers();
-            stopMusic();
-            
-            currentStage = "main";
-            if (textHeartsInterval) clearInterval(textHeartsInterval);
-            document.querySelectorAll('.text-bg-heart').forEach(el => el.remove());
 
-            document.getElementById("new-page").style.display = "none";
-            document.getElementById("pass-wrapper").style.display = "flex";
-            document.getElementById("pass-input").value = "";
-            document.getElementById("error-msg").style.display = "none";
+            clearTypewriterTimers();
+
+            stopMusic();
+
+            stopFinalAudio();
+
+            currentStage = "main";
+
+
+            if (textHeartsInterval) {
+
+                clearInterval(
+                    textHeartsInterval
+                );
+
+                textHeartsInterval = null;
+            }
+
+
+            document
+                .querySelectorAll(
+                    ".text-bg-heart"
+                )
+                .forEach(el => el.remove());
+
+
+            document.getElementById(
+                "new-page"
+            ).style.display = "none";
+
+
+            document.getElementById(
+                "pass-wrapper"
+            ).style.display = "flex";
+
+
+            document.getElementById(
+                "pass-input"
+            ).value = "";
+
+
+            document.getElementById(
+                "error-msg"
+            ).style.display = "none";
         }
 
-        function goToFinalPage() {
+
+        /* =========================================================
+           GO TO VIDEO
+        ========================================================= */
+
+        async function goToFinalPage() {
+
+            /*
+             * الضغط على For You يعتبر user gesture.
+             */
+
             stopMusic();
 
-            document.getElementById("new-page").style.display = "none";
-            const finalPage = document.getElementById("final-destination-page");
-            finalPage.style.display = "flex";
+            stopFinalAudio();
 
-            document.getElementById("vid-wrapper").style.display = "flex";
-            document.getElementById("nav-wrapper").style.display = "flex";
-            document.getElementById("continue-container").style.display = "none";
 
-            const vid = document.getElementById("main-video");
-            vid.currentTime = 0;
-            
-            let playPromise = vid.play();
-            if (playPromise !== undefined) {
-                playPromise.catch(() => {
-                    vid.muted = true;
+            document.getElementById(
+                "new-page"
+            ).style.display = "none";
+
+
+            const finalPage =
+                document.getElementById(
+                    "final-destination-page"
+                );
+
+
+            finalPage.style.display =
+                "flex";
+
+
+            document.getElementById(
+                "vid-wrapper"
+            ).style.display = "flex";
+
+
+            document.getElementById(
+                "nav-wrapper"
+            ).style.display = "flex";
+
+
+            document.getElementById(
+                "continue-container"
+            ).style.display = "none";
+
+
+            const vid =
+                document.getElementById(
+                    "main-video"
+                );
+
+
+            try {
+
+                vid.pause();
+
+                vid.currentTime = 0;
+
+            } catch (error) {
+
+                console.log(
+                    "Video reset error:",
+                    error
+                );
+
+            }
+
+
+            /*
+             * نحاول تشغيل الفيديو بالصوت.
+             *
+             * مهم:
+             * لا نعمل muted تلقائيًا.
+             */
+            try {
+
+                vid.muted = false;
+
+                const promise =
                     vid.play();
-                });
+
+                if (promise !== undefined) {
+                    await promise;
+                }
+
+                console.log(
+                    "Video started with sound."
+                );
+
+            } catch (error) {
+
+                console.log(
+                    "Video autoplay error:",
+                    error
+                );
+
+                /*
+                 * لا نكتم الفيديو هنا.
+                 * المستخدم يستطيع الضغط على زر Play
+                 * الموجود في controls.
+                 */
+
             }
         }
 
-        document.getElementById("main-video").addEventListener("ended", function() {
-            document.getElementById("vid-wrapper").style.display = "none";
-            document.getElementById("nav-wrapper").style.display = "none";
-            document.getElementById("continue-container").style.display = "flex";
-        });
+
+        /* =========================================================
+           VIDEO ENDED
+        ========================================================= */
+
+        document
+            .getElementById("main-video")
+            .addEventListener(
+                "ended",
+                function() {
+
+                    document.getElementById(
+                        "vid-wrapper"
+                    ).style.display = "none";
+
+
+                    document.getElementById(
+                        "nav-wrapper"
+                    ).style.display = "none";
+
+
+                    document.getElementById(
+                        "continue-container"
+                    ).style.display = "flex";
+
+                }
+            );
+
+
+        /* =========================================================
+           SKIP VIDEO
+        ========================================================= */
 
         function skipVideo() {
-            const vid = document.getElementById("main-video");
-            vid.pause();
 
-            document.getElementById("vid-wrapper").style.display = "none";
-            document.getElementById("nav-wrapper").style.display = "none";
-            document.getElementById("continue-container").style.display = "flex";
+            const vid =
+                document.getElementById(
+                    "main-video"
+                );
+
+
+            try {
+                vid.pause();
+            } catch (error) {
+                console.log(error);
+            }
+
+
+            document.getElementById(
+                "vid-wrapper"
+            ).style.display = "none";
+
+
+            document.getElementById(
+                "nav-wrapper"
+            ).style.display = "none";
+
+
+            document.getElementById(
+                "continue-container"
+            ).style.display = "flex";
         }
 
-        function goBackToPreviousPageFromVideo() {
-            const vid = document.getElementById("main-video");
-            vid.pause();
 
-            document.getElementById("final-destination-page").style.display = "none";
-            document.getElementById("new-page").style.display = "flex";
-            document.getElementById("for-you-btn").style.display = "block";
+        /* =========================================================
+           BACK FROM VIDEO
+        ========================================================= */
 
-            const music = document.getElementById('bg-music');
-            if (music) {
-                music.play().catch(e => console.log("Audio resume error:", e));
-                musicStarted = true;
+        async function goBackToPreviousPageFromVideo() {
+
+            const vid =
+                document.getElementById(
+                    "main-video"
+                );
+
+
+            try {
+                vid.pause();
+            } catch (error) {
+                console.log(error);
+            }
+
+
+            document.getElementById(
+                "final-destination-page"
+            ).style.display = "none";
+
+
+            document.getElementById(
+                "new-page"
+            ).style.display = "flex";
+
+
+            document.getElementById(
+                "for-you-btn"
+            ).style.display = "block";
+
+
+            /*
+             * الرجوع جاء من ضغطة مستخدم،
+             * لذلك نحاول استئناف الموسيقى.
+             */
+            await playMusic();
+        }
+
+
+        /* =========================================================
+           BACK FROM CONTINUE
+        ========================================================= */
+
+        async function goBackFromContinueScreen() {
+
+            document.getElementById(
+                "continue-container"
+            ).style.display = "none";
+
+
+            document.getElementById(
+                "vid-wrapper"
+            ).style.display = "flex";
+
+
+            document.getElementById(
+                "nav-wrapper"
+            ).style.display = "flex";
+
+
+            const vid =
+                document.getElementById(
+                    "main-video"
+                );
+
+
+            try {
+
+                vid.currentTime = 0;
+
+                vid.muted = false;
+
+                const promise =
+                    vid.play();
+
+                if (promise !== undefined) {
+                    await promise;
+                }
+
+            } catch (error) {
+
+                console.log(
+                    "Video resume error:",
+                    error
+                );
+
             }
         }
 
-        function goBackFromContinueScreen() {
-            document.getElementById("continue-container").style.display = "none";
-            document.getElementById("vid-wrapper").style.display = "flex";
-            document.getElementById("nav-wrapper").style.display = "flex";
 
-            const vid = document.getElementById("main-video");
-            vid.currentTime = 0;
-            vid.play().catch(() => {
-                vid.muted = true;
-                vid.play();
-            });
-        }
+        /* =========================================================
+           FIREWORKS PAGE
+        ========================================================= */
 
         function goToFireworksPage() {
-            document.getElementById("final-destination-page").style.display = "none";
-            document.getElementById("fireworks-page").style.display = "flex";
-            
-            fireworksActive = false;
 
-            const heart = document.getElementById("beating-heart");
-            const loveText = document.getElementById("love-text");
-            heart.style.display = "block";
-            loveText.style.display = "none";
-        }
+            const vid =
+                document.getElementById(
+                    "main-video"
+                );
 
-        function goBackFromFireworks() {
-            finalAudio.pause();
-            finalAudio.currentTime = 0;
 
-            fireworksActive = false;
-
-            document.getElementById("fireworks-page").style.display = "none";
-            const finalPage = document.getElementById("final-destination-page");
-            finalPage.style.display = "flex";
-
-            document.getElementById("vid-wrapper").style.display = "none";
-            document.getElementById("nav-wrapper").style.display = "none";
-            document.getElementById("continue-container").style.display = "flex";
-        }
-
-        function explodeHeart() {
-            const heart = document.getElementById("beating-heart");
-            if (heart.style.display === "none") return; 
-
-            const rect = heart.getBoundingClientRect();
-            const centerX = rect.left + rect.width / 2;
-            const centerY = rect.top + rect.height / 2;
-
-            for (let i = 0; i < 35; i++) {
-                const shard = document.createElement("div");
-                shard.classList.add("heart-shard");
-                shard.innerText = Math.random() > 0.5 ? "❤️" : "💖";
-                shard.style.left = centerX + "px";
-                shard.style.top = centerY + "px";
-
-                const angle = Math.random() * Math.PI * 2;
-                const distance = Math.random() * 180 + 50;
-                const dx = Math.cos(angle) * distance;
-                const dy = Math.sin(angle) * distance;
-
-                shard.style.setProperty("--dx", dx + "px");
-                shard.style.setProperty("--dy", dy + "px");
-
-                document.getElementById("fireworks-page").appendChild(shard);
-                setTimeout(() => shard.remove(), 1200);
+            try {
+                vid.pause();
+            } catch (error) {
+                console.log(error);
             }
 
-            heart.style.display = "none";
-            document.getElementById("love-text").style.display = "block";
 
-            finalAudio.currentTime = 0;
-            finalAudio.play().catch(e => console.log("Final audio error:", e));
+            document.getElementById(
+                "final-destination-page"
+            ).style.display = "none";
+
+
+            document.getElementById(
+                "fireworks-page"
+            ).style.display = "flex";
+
+
+            fireworksActive = false;
+
+
+            const heart =
+                document.getElementById(
+                    "beating-heart"
+                );
+
+
+            const loveText =
+                document.getElementById(
+                    "love-text"
+                );
+
+
+            heart.style.display =
+                "block";
+
+
+            loveText.style.display =
+                "none";
+        }
+
+
+        /* =========================================================
+           BACK FROM FIREWORKS
+        ========================================================= */
+
+        function goBackFromFireworks() {
+
+            stopFinalAudio();
+
+            fireworksActive = false;
+
+
+            document.getElementById(
+                "fireworks-page"
+            ).style.display = "none";
+
+
+            const finalPage =
+                document.getElementById(
+                    "final-destination-page"
+                );
+
+
+            finalPage.style.display =
+                "flex";
+
+
+            document.getElementById(
+                "vid-wrapper"
+            ).style.display = "none";
+
+
+            document.getElementById(
+                "nav-wrapper"
+            ).style.display = "none";
+
+
+            document.getElementById(
+                "continue-container"
+            ).style.display = "flex";
+        }
+
+
+        /* =========================================================
+           EXPLODE HEART
+        ========================================================= */
+
+        async function explodeHeart() {
+
+            const heart =
+                document.getElementById(
+                    "beating-heart"
+                );
+
+
+            if (
+                heart.style.display === "none"
+            ) {
+                return;
+            }
+
+
+            const rect =
+                heart.getBoundingClientRect();
+
+
+            const centerX =
+                rect.left +
+                rect.width / 2;
+
+
+            const centerY =
+                rect.top +
+                rect.height / 2;
+
+
+            for (
+                let i = 0;
+                i < 35;
+                i++
+            ) {
+
+                const shard =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                shard.classList.add(
+                    "heart-shard"
+                );
+
+
+                shard.innerText =
+                    Math.random() > 0.5
+                        ? "❤️"
+                        : "💖";
+
+
+                shard.style.left =
+                    centerX + "px";
+
+
+                shard.style.top =
+                    centerY + "px";
+
+
+                const angle =
+                    Math.random() *
+                    Math.PI *
+                    2;
+
+
+                const distance =
+                    Math.random() *
+                    180 +
+                    50;
+
+
+                const dx =
+                    Math.cos(angle) *
+                    distance;
+
+
+                const dy =
+                    Math.sin(angle) *
+                    distance;
+
+
+                shard.style.setProperty(
+                    "--dx",
+                    dx + "px"
+                );
+
+
+                shard.style.setProperty(
+                    "--dy",
+                    dy + "px"
+                );
+
+
+                document
+                    .getElementById(
+                        "fireworks-page"
+                    )
+                    .appendChild(shard);
+
+
+                setTimeout(() => {
+
+                    if (shard.parentNode) {
+                        shard.remove();
+                    }
+
+                }, 1200);
+            }
+
+
+            heart.style.display =
+                "none";
+
+
+            document.getElementById(
+                "love-text"
+            ).style.display = "block";
+
+
+            /*
+             * مهم جدًا:
+             * explodeHeart يتم استدعاؤها مباشرة
+             * من click المستخدم.
+             *
+             * لذلك هنا أفضل مكان لتشغيل الصوت
+             * بدون مشاكل autoplay.
+             */
+            await playFinalAudio();
+
 
             fireworksActive = true;
+
             initFireworks();
         }
 
-        const canvas = document.getElementById("fireworks-canvas");
-        const ctx = canvas.getContext("2d");
+
+        /* =========================================================
+           FIREWORKS
+        ========================================================= */
+
+        const canvas =
+            document.getElementById(
+                "fireworks-canvas"
+            );
+
+
+        const ctx =
+            canvas.getContext("2d");
+
+
         let fireworks = [];
         let particles = [];
 
+
         function resizeCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
+
+            canvas.width =
+                window.innerWidth;
+
+            canvas.height =
+                window.innerHeight;
         }
-        window.addEventListener("resize", resizeCanvas);
+
+
+        window.addEventListener(
+            "resize",
+            resizeCanvas
+        );
+
+
         resizeCanvas();
 
+
         class Firework {
-            constructor(x, y, targetX, targetY) {
+
+            constructor(
+                x,
+                y,
+                targetX,
+                targetY
+            ) {
+
                 this.x = x;
                 this.y = y;
-                this.targetX = targetX;
-                this.targetY = targetY;
-                this.distanceToTarget = Math.hypot(targetX - x, targetY - y);
+
+                this.targetX =
+                    targetX;
+
+                this.targetY =
+                    targetY;
+
+
+                this.distanceToTarget =
+                    Math.hypot(
+                        targetX - x,
+                        targetY - y
+                    );
+
+
                 this.distanceTraveled = 0;
+
                 this.coordinates = [];
+
                 this.coordinateCount = 3;
-                while (this.coordinateCount--) {
-                    this.coordinates.push([this.x, this.y]);
+
+
+                while (
+                    this.coordinateCount--
+                ) {
+
+                    this.coordinates.push([
+                        this.x,
+                        this.y
+                    ]);
+
                 }
-                this.angle = Math.atan2(targetY - y, targetX - x);
+
+
+                this.angle =
+                    Math.atan2(
+                        targetY - y,
+                        targetX - x
+                    );
+
+
                 this.speed = 2;
+
                 this.acceleration = 1.05;
-                this.brightness = Math.random() * 50 + 50;
+
+                this.brightness =
+                    Math.random() *
+                    50 +
+                    50;
+
                 this.targetRadius = 1;
             }
-            update(index) {
-                this.coordinates.pop();
-                this.coordinates.unshift([this.x, this.y]);
 
-                if (this.targetRadius < 8) {
+
+            update(index) {
+
+                this.coordinates.pop();
+
+                this.coordinates.unshift([
+                    this.x,
+                    this.y
+                ]);
+
+
+                if (
+                    this.targetRadius < 8
+                ) {
+
                     this.targetRadius += 0.3;
                 }
 
-                this.speed *= this.acceleration;
-                let vx = Math.cos(this.angle) * this.speed;
-                let vy = Math.sin(this.angle) * this.speed;
-                this.distanceTraveled = Math.hypot(this.x - (this.x + vx), this.y - (this.y + vy));
 
-                if (Math.hypot(this.targetX - this.x, this.targetY - this.y) <= this.speed) {
-                    fireworks.splice(index, 1);
-                    createParticles(this.targetX, this.targetY);
+                this.speed *=
+                    this.acceleration;
+
+
+                const vx =
+                    Math.cos(this.angle) *
+                    this.speed;
+
+
+                const vy =
+                    Math.sin(this.angle) *
+                    this.speed;
+
+
+                this.distanceTraveled =
+                    Math.hypot(
+                        this.x -
+                            (this.x + vx),
+
+                        this.y -
+                            (this.y + vy)
+                    );
+
+
+                if (
+                    Math.hypot(
+                        this.targetX -
+                            this.x,
+
+                        this.targetY -
+                            this.y
+                    ) <= this.speed
+                ) {
+
+                    fireworks.splice(
+                        index,
+                        1
+                    );
+
+
+                    createParticles(
+                        this.targetX,
+                        this.targetY
+                    );
+
                 } else {
+
                     this.x += vx;
                     this.y += vy;
                 }
             }
+
+
             draw() {
+
                 ctx.beginPath();
-                ctx.moveTo(this.coordinates[this.coordinates.length - 1][0], this.coordinates[this.coordinates.length - 1][1]);
-                ctx.lineTo(this.x, this.y);
-                ctx.strokeStyle = 'hsl(' + Math.random() * 360 + ', 100%, ' + this.brightness + '%)';
+
+
+                ctx.moveTo(
+                    this.coordinates[
+                        this.coordinates.length - 1
+                    ][0],
+
+                    this.coordinates[
+                        this.coordinates.length - 1
+                    ][1]
+                );
+
+
+                ctx.lineTo(
+                    this.x,
+                    this.y
+                );
+
+
+                ctx.strokeStyle =
+                    "hsl(" +
+                    Math.random() *
+                        360 +
+                    ", 100%, " +
+                    this.brightness +
+                    "%)";
+
+
                 ctx.stroke();
             }
         }
+
 
         class Particle {
+
             constructor(x, y) {
+
                 this.x = x;
                 this.y = y;
-                this.coordinates = [];
-                this.coordinateCount = 5;
-                while (this.coordinateCount--) {
-                    this.coordinates.push([this.x, this.y]);
-                }
-                this.angle = Math.random() * Math.PI * 2;
-                this.speed = Math.random() * 10 + 2;
-                this.friction = 0.95;
-                this.gravity = 1;
-                this.hue = Math.random() * 360;
-                this.brightness = Math.random() * 50 + 50;
-                this.alpha = 1;
-                this.decay = Math.random() * 0.015 + 0.015;
-            }
-            update(index) {
-                this.coordinates.pop();
-                this.coordinates.unshift([this.x, this.y]);
-                this.speed *= this.friction;
-                this.x += Math.cos(this.angle) * this.speed;
-                this.y += Math.sin(this.angle) * this.speed + this.gravity;
-                this.alpha -= this.decay;
 
-                if (this.alpha <= this.decay) {
-                    particles.splice(index, 1);
+                this.coordinates = [];
+
+                this.coordinateCount = 5;
+
+
+                while (
+                    this.coordinateCount--
+                ) {
+
+                    this.coordinates.push([
+                        this.x,
+                        this.y
+                    ]);
+
+                }
+
+
+                this.angle =
+                    Math.random() *
+                    Math.PI *
+                    2;
+
+
+                this.speed =
+                    Math.random() *
+                        10 +
+                    2;
+
+
+                this.friction = 0.95;
+
+                this.gravity = 1;
+
+                this.hue =
+                    Math.random() *
+                    360;
+
+
+                this.brightness =
+                    Math.random() *
+                        50 +
+                    50;
+
+
+                this.alpha = 1;
+
+
+                this.decay =
+                    Math.random() *
+                        0.015 +
+                    0.015;
+            }
+
+
+            update(index) {
+
+                this.coordinates.pop();
+
+                this.coordinates.unshift([
+                    this.x,
+                    this.y
+                ]);
+
+
+                this.speed *=
+                    this.friction;
+
+
+                this.x +=
+                    Math.cos(
+                        this.angle
+                    ) *
+                    this.speed;
+
+
+                this.y +=
+                    Math.sin(
+                        this.angle
+                    ) *
+                    this.speed +
+                    this.gravity;
+
+
+                this.alpha -=
+                    this.decay;
+
+
+                if (
+                    this.alpha <=
+                    this.decay
+                ) {
+
+                    particles.splice(
+                        index,
+                        1
+                    );
                 }
             }
+
+
             draw() {
+
                 ctx.beginPath();
-                ctx.moveTo(this.coordinates[this.coordinates.length - 1][0], this.coordinates[this.coordinates.length - 1][1]);
-                ctx.lineTo(this.x, this.y);
-                ctx.strokeStyle = 'hsla(' + this.hue + ', 100%, ' + this.brightness + '%, ' + this.alpha + ')';
+
+
+                ctx.moveTo(
+                    this.coordinates[
+                        this.coordinates.length - 1
+                    ][0],
+
+                    this.coordinates[
+                        this.coordinates.length - 1
+                    ][1]
+                );
+
+
+                ctx.lineTo(
+                    this.x,
+                    this.y
+                );
+
+
+                ctx.strokeStyle =
+                    "hsla(" +
+                    this.hue +
+                    ", 100%, " +
+                    this.brightness +
+                    "%, " +
+                    this.alpha +
+                    ")";
+
+
                 ctx.stroke();
             }
         }
 
-        function createParticles(x, y) {
+
+        function createParticles(
+            x,
+            y
+        ) {
+
             let particleCount = 30;
-            while (particleCount--) {
-                particles.push(new Particle(x, y));
+
+
+            while (
+                particleCount--
+            ) {
+
+                particles.push(
+                    new Particle(
+                        x,
+                        y
+                    )
+                );
             }
         }
+
 
         let limiterTotal = 5;
         let limiterTick = 0;
 
+
+        function initFireworks() {
+
+            /*
+             * إعادة تشغيل العداد عند الدخول
+             * للصفحة الأخيرة.
+             */
+            limiterTick = 0;
+
+            fireworksActive = true;
+        }
+
+
         function loopFireworks() {
-            requestAnimationFrame(loopFireworks);
+
+            requestAnimationFrame(
+                loopFireworks
+            );
+
 
             if (!fireworksActive) {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                ctx.clearRect(
+                    0,
+                    0,
+                    canvas.width,
+                    canvas.height
+                );
+
+
                 fireworks = [];
                 particles = [];
+
                 return;
             }
 
-            ctx.globalCompositeOperation = 'destination-out';
-            ctx.fillStyle = 'rgba(0, 0, 0, 0.5)';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            ctx.globalCompositeOperation = 'lighter';
 
-            let i = fireworks.length;
+            ctx.globalCompositeOperation =
+                "destination-out";
+
+
+            ctx.fillStyle =
+                "rgba(0, 0, 0, 0.5)";
+
+
+            ctx.fillRect(
+                0,
+                0,
+                canvas.width,
+                canvas.height
+            );
+
+
+            ctx.globalCompositeOperation =
+                "lighter";
+
+
+            let i =
+                fireworks.length;
+
+
             while (i--) {
+
                 fireworks[i].draw();
+
                 fireworks[i].update(i);
             }
 
-            let j = particles.length;
+
+            let j =
+                particles.length;
+
+
             while (j--) {
+
                 particles[j].draw();
+
                 particles[j].update(j);
             }
 
-            if (limiterTick >= limiterTotal) {
-                fireworks.push(new Firework(canvas.width / 2, canvas.height, Math.random() * canvas.width, Math.random() * (canvas.height / 2)));
+
+            if (
+                limiterTick >=
+                limiterTotal
+            ) {
+
+                fireworks.push(
+                    new Firework(
+                        canvas.width / 2,
+                        canvas.height,
+                        Math.random() *
+                            canvas.width,
+                        Math.random() *
+                            (canvas.height / 2)
+                    )
+                );
+
+
                 limiterTick = 0;
+
             } else {
+
                 limiterTick++;
             }
         }
 
+
         loopFireworks();
+
+
+        /* =========================================================
+           PAGE VISIBILITY
+           ========================================================= */
+
+        /*
+         * لو المستخدم خرج من التاب أو قفل الشاشة،
+         * نوقف الصوت لتجنب مشاكل المتصفحات.
+         */
+        document.addEventListener(
+            "visibilitychange",
+            function() {
+
+                if (
+                    document.hidden
+                ) {
+
+                    const music =
+                        getBackgroundMusic();
+
+                    if (
+                        music &&
+                        !music.paused
+                    ) {
+
+                        music.pause();
+                    }
+
+                    if (
+                        !finalAudio.paused
+                    ) {
+
+                        finalAudio.pause();
+                    }
+
+                } else {
+
+                    /*
+                     * لا نشغل الصوت تلقائيًا عند
+                     * الرجوع لأن بعض المتصفحات تمنعه.
+                     *
+                     * سيعود مع تفاعل المستخدم.
+                     */
+
+                }
+
+            }
+        );
+
+
+        /* =========================================================
+           AUDIO EVENTS / DEBUG
+        ========================================================= */
+
+        const bgMusic =
+            getBackgroundMusic();
+
+
+        if (bgMusic) {
+
+            bgMusic.addEventListener(
+                "error",
+                function() {
+
+                    console.log(
+                        "Background audio error:",
+                        bgMusic.error
+                    );
+
+                }
+            );
+
+
+            bgMusic.addEventListener(
+                "playing",
+                function() {
+
+                    musicStarted = true;
+
+                    console.log(
+                        "Background music is playing."
+                    );
+
+                }
+            );
+
+
+            bgMusic.addEventListener(
+                "pause",
+                function() {
+
+                    /*
+                     * لا نغير musicStarted هنا
+                     * إلا لو الصوت متوقف فعليًا.
+                     */
+
+                    if (
+                        bgMusic.ended ||
+                        bgMusic.currentTime === 0
+                    ) {
+
+                        musicStarted = false;
+                    }
+
+                }
+            );
+        }
+
+
+        finalAudio.addEventListener(
+            "error",
+            function() {
+
+                console.log(
+                    "Final audio error:",
+                    finalAudio.error
+                );
+
+            }
+        );
+
+
+        finalAudio.addEventListener(
+            "playing",
+            function() {
+
+                console.log(
+                    "Final audio is playing."
+                );
+
+            }
+        );
+
     </script>
+
 </body>
 </html>
-
-
-
-
-
-//تتتتاتاتات
