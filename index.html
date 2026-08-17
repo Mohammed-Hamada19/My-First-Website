@@ -1,111 +1,77 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>مرحبا ❤️</title>
+    <title>مرحبا</title>
 
     <style>
-        * {
-            box-sizing: border-box;
-        }
-
-        html, body {
-            margin: 0;
-            width: 100%;
-            height: 100%;
-            background: #000;
-        }
-
         body {
-            font-family: Arial, sans-serif;
-        }
-
-        #startPage,
-        #welcomePage {
-            width: 100%;
+            margin: 0;
+            background: black;
+            color: white;
             height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            flex-direction: column;
+            font-family: Arial;
         }
 
-        #startPage {
-            background: #000;
-        }
-
-        #startButton {
-            padding: 18px 45px;
-            border: 0;
-            border-radius: 50px;
-            background: #ff1744;
-            color: white;
-            font-size: 22px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-        #welcomePage {
+        #welcome {
             display: none;
-            background: #000;
-            color: white;
+            text-align: center;
         }
 
-        #welcomePage h1 {
-            margin: 0;
-            font-size: 55px;
+        #welcome h1 {
+            font-size: 50px;
         }
 
-        .heart {
-            margin-top: 20px;
+        #welcome .heart {
             font-size: 80px;
-            animation: beat 1s infinite;
         }
 
-        @keyframes beat {
-            0%, 100% {
-                transform: scale(1);
-            }
-
-            50% {
-                transform: scale(1.2);
-            }
+        #enter {
+            padding: 15px 35px;
+            font-size: 20px;
+            background: red;
+            color: white;
+            border: 0;
+            border-radius: 30px;
         }
     </style>
 </head>
 
 <body>
 
-    <div id="startPage">
-        <button id="startButton">ادخل ❤️</button>
-    </div>
+    <button id="enter">ادخل ❤️</button>
 
-    <div id="welcomePage">
+    <div id="welcome">
         <h1>مرحبا</h1>
         <div class="heart">❤️</div>
     </div>
 
-    <audio id="music" loop preload="auto">
-        <source src="https://files.catbox.moe/4zig9x.mp4" type="audio/mp4">
+    <audio id="song" loop preload="auto">
+        <source src="https://files.catbox.moe/4zig9x.mp4">
     </audio>
 
     <script>
-        const button = document.getElementById("startButton");
-        const startPage = document.getElementById("startPage");
-        const welcomePage = document.getElementById("welcomePage");
-        const music = document.getElementById("music");
+        document.getElementById("enter").addEventListener("click", function () {
 
-        button.onclick = function () {
-            startPage.style.display = "none";
-            welcomePage.style.display = "flex";
+            document.getElementById("enter").style.display = "none";
+            document.getElementById("welcome").style.display = "block";
 
-            music.currentTime = 0;
+            var song = document.getElementById("song");
 
-            music.play().catch(function (error) {
-                console.log(error);
-            });
-        };
+            song.load();
+
+            var play = song.play();
+
+            if (play !== undefined) {
+                play.catch(function(error) {
+                    console.log("Audio:", error);
+                });
+            }
+        });
     </script>
 
 </body>
